@@ -1,0 +1,11 @@
+start simple3
+(x 1)
+(print x)
+(x (3 4 +))
+(print x)
+(y (10))
+(print y)
+(y (10 x +))
+(print y)
+
+end

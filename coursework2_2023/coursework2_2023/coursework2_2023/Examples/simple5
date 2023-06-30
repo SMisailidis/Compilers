@@ -1,0 +1,4 @@
+start simple5
+(x (3 (int 4.0) +))
+(print x)
+end

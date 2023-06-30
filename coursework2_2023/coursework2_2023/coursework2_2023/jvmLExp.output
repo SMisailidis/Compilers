@@ -1,0 +1,615 @@
+State 30 conflicts: 5 shift/reduce
+
+
+Grammar
+
+    0 $accept: program $end
+
+    1 $@1: ε
+
+    2 program: "start" T_id $@1 stmts "end"
+
+    3 stmts: ε
+    4      | stmts stmt
+
+    5 stmt: '(' command ')'
+
+    6 command: "print" print_expr
+    7        | assignments
+
+    8 assignments: T_id expr
+    9            | T_id '[' "forall" T_id "in" T_int ".." T_int ']'
+
+   10 print_expr: expr
+
+   11 expr: parenthesis_expr
+   12     | non_parenthesis_expr
+
+   13 parenthesis_expr: '(' non_type_expr ')'
+   14                 | '(' type_expr ')'
+
+   15 non_parenthesis_expr: non_type_expr
+   16                     | type_expr
+
+   17 type_expr: T_type expr
+
+   18 non_type_expr: term
+   19              | operation
+
+   20 operation: expr expr '+'
+   21          | expr expr '*'
+
+   22 term: T_id
+   23     | T_int
+   24     | ".."
+   25     | T_id '[' T_int ']'
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    '(' (40) 5 13 14
+    ')' (41) 5 13 14
+    '*' (42) 21
+    '+' (43) 20
+    '[' (91) 9 25
+    ']' (93) 9 25
+    error (256)
+    T_type <tokentype> (258) 17
+    T_int <lexical> (259) 9 23 25
+    ".." <lexical> (260) 9 24
+    T_id <lexical> (261) 2 8 9 22 25
+    "start" (262) 2
+    "end" (263) 2
+    "forall" (264) 9
+    "print" (265) 6
+    "in" (266) 9
+
+
+Nonterminals, with rules where they appear
+
+    $accept (18)
+        on left: 0
+    program (19)
+        on left: 2
+        on right: 0
+    $@1 (20)
+        on left: 1
+        on right: 2
+    stmts (21)
+        on left: 3 4
+        on right: 2 4
+    stmt (22)
+        on left: 5
+        on right: 4
+    command (23)
+        on left: 6 7
+        on right: 5
+    assignments (24)
+        on left: 8 9
+        on right: 7
+    print_expr <se> (25)
+        on left: 10
+        on right: 6
+    expr <se> (26)
+        on left: 11 12
+        on right: 8 10 17 20 21
+    parenthesis_expr <se> (27)
+        on left: 13 14
+        on right: 11
+    non_parenthesis_expr <se> (28)
+        on left: 15 16
+        on right: 12
+    type_expr <se> (29)
+        on left: 17
+        on right: 14 16
+    non_type_expr <se> (30)
+        on left: 18 19
+        on right: 13 15
+    operation <se> (31)
+        on left: 20 21
+        on right: 19
+    term <se> (32)
+        on left: 22 23 24 25
+        on right: 18
+
+
+State 0
+
+    0 $accept: • program $end
+
+    "start"  shift, and go to state 1
+
+    program  go to state 2
+
+
+State 1
+
+    2 program: "start" • T_id $@1 stmts "end"
+
+    T_id  shift, and go to state 3
+
+
+State 2
+
+    0 $accept: program • $end
+
+    $end  shift, and go to state 4
+
+
+State 3
+
+    2 program: "start" T_id • $@1 stmts "end"
+
+    $default  reduce using rule 1 ($@1)
+
+    $@1  go to state 5
+
+
+State 4
+
+    0 $accept: program $end •
+
+    $default  accept
+
+
+State 5
+
+    2 program: "start" T_id $@1 • stmts "end"
+
+    $default  reduce using rule 3 (stmts)
+
+    stmts  go to state 6
+
+
+State 6
+
+    2 program: "start" T_id $@1 stmts • "end"
+    4 stmts: stmts • stmt
+
+    "end"  shift, and go to state 7
+    '('    shift, and go to state 8
+
+    stmt  go to state 9
+
+
+State 7
+
+    2 program: "start" T_id $@1 stmts "end" •
+
+    $default  reduce using rule 2 (program)
+
+
+State 8
+
+    5 stmt: '(' • command ')'
+
+    T_id     shift, and go to state 10
+    "print"  shift, and go to state 11
+
+    command      go to state 12
+    assignments  go to state 13
+
+
+State 9
+
+    4 stmts: stmts stmt •
+
+    $default  reduce using rule 4 (stmts)
+
+
+State 10
+
+    8 assignments: T_id • expr
+    9            | T_id • '[' "forall" T_id "in" T_int ".." T_int ']'
+
+    T_type  shift, and go to state 14
+    T_int   shift, and go to state 15
+    ".."    shift, and go to state 16
+    T_id    shift, and go to state 17
+    '('     shift, and go to state 18
+    '['     shift, and go to state 19
+
+    expr                  go to state 20
+    parenthesis_expr      go to state 21
+    non_parenthesis_expr  go to state 22
+    type_expr             go to state 23
+    non_type_expr         go to state 24
+    operation             go to state 25
+    term                  go to state 26
+
+
+State 11
+
+    6 command: "print" • print_expr
+
+    T_type  shift, and go to state 14
+    T_int   shift, and go to state 15
+    ".."    shift, and go to state 16
+    T_id    shift, and go to state 17
+    '('     shift, and go to state 18
+
+    print_expr            go to state 27
+    expr                  go to state 28
+    parenthesis_expr      go to state 21
+    non_parenthesis_expr  go to state 22
+    type_expr             go to state 23
+    non_type_expr         go to state 24
+    operation             go to state 25
+    term                  go to state 26
+
+
+State 12
+
+    5 stmt: '(' command • ')'
+
+    ')'  shift, and go to state 29
+
+
+State 13
+
+    7 command: assignments •
+
+    $default  reduce using rule 7 (command)
+
+
+State 14
+
+   17 type_expr: T_type • expr
+
+    T_type  shift, and go to state 14
+    T_int   shift, and go to state 15
+    ".."    shift, and go to state 16
+    T_id    shift, and go to state 17
+    '('     shift, and go to state 18
+
+    expr                  go to state 30
+    parenthesis_expr      go to state 21
+    non_parenthesis_expr  go to state 22
+    type_expr             go to state 23
+    non_type_expr         go to state 24
+    operation             go to state 25
+    term                  go to state 26
+
+
+State 15
+
+   23 term: T_int •
+
+    $default  reduce using rule 23 (term)
+
+
+State 16
+
+   24 term: ".." •
+
+    $default  reduce using rule 24 (term)
+
+
+State 17
+
+   22 term: T_id •
+   25     | T_id • '[' T_int ']'
+
+    '['  shift, and go to state 31
+
+    $default  reduce using rule 22 (term)
+
+
+State 18
+
+   13 parenthesis_expr: '(' • non_type_expr ')'
+   14                 | '(' • type_expr ')'
+
+    T_type  shift, and go to state 14
+    T_int   shift, and go to state 15
+    ".."    shift, and go to state 16
+    T_id    shift, and go to state 17
+    '('     shift, and go to state 18
+
+    expr                  go to state 32
+    parenthesis_expr      go to state 21
+    non_parenthesis_expr  go to state 22
+    type_expr             go to state 33
+    non_type_expr         go to state 34
+    operation             go to state 25
+    term                  go to state 26
+
+
+State 19
+
+    9 assignments: T_id '[' • "forall" T_id "in" T_int ".." T_int ']'
+
+    "forall"  shift, and go to state 35
+
+
+State 20
+
+    8 assignments: T_id expr •
+   20 operation: expr • expr '+'
+   21          | expr • expr '*'
+
+    T_type  shift, and go to state 14
+    T_int   shift, and go to state 15
+    ".."    shift, and go to state 16
+    T_id    shift, and go to state 17
+    '('     shift, and go to state 18
+
+    $default  reduce using rule 8 (assignments)
+
+    expr                  go to state 36
+    parenthesis_expr      go to state 21
+    non_parenthesis_expr  go to state 22
+    type_expr             go to state 23
+    non_type_expr         go to state 24
+    operation             go to state 25
+    term                  go to state 26
+
+
+State 21
+
+   11 expr: parenthesis_expr •
+
+    $default  reduce using rule 11 (expr)
+
+
+State 22
+
+   12 expr: non_parenthesis_expr •
+
+    $default  reduce using rule 12 (expr)
+
+
+State 23
+
+   16 non_parenthesis_expr: type_expr •
+
+    $default  reduce using rule 16 (non_parenthesis_expr)
+
+
+State 24
+
+   15 non_parenthesis_expr: non_type_expr •
+
+    $default  reduce using rule 15 (non_parenthesis_expr)
+
+
+State 25
+
+   19 non_type_expr: operation •
+
+    $default  reduce using rule 19 (non_type_expr)
+
+
+State 26
+
+   18 non_type_expr: term •
+
+    $default  reduce using rule 18 (non_type_expr)
+
+
+State 27
+
+    6 command: "print" print_expr •
+
+    $default  reduce using rule 6 (command)
+
+
+State 28
+
+   10 print_expr: expr •
+   20 operation: expr • expr '+'
+   21          | expr • expr '*'
+
+    T_type  shift, and go to state 14
+    T_int   shift, and go to state 15
+    ".."    shift, and go to state 16
+    T_id    shift, and go to state 17
+    '('     shift, and go to state 18
+
+    $default  reduce using rule 10 (print_expr)
+
+    expr                  go to state 36
+    parenthesis_expr      go to state 21
+    non_parenthesis_expr  go to state 22
+    type_expr             go to state 23
+    non_type_expr         go to state 24
+    operation             go to state 25
+    term                  go to state 26
+
+
+State 29
+
+    5 stmt: '(' command ')' •
+
+    $default  reduce using rule 5 (stmt)
+
+
+State 30
+
+   17 type_expr: T_type expr •
+   20 operation: expr • expr '+'
+   21          | expr • expr '*'
+
+    T_type  shift, and go to state 14
+    T_int   shift, and go to state 15
+    ".."    shift, and go to state 16
+    T_id    shift, and go to state 17
+    '('     shift, and go to state 18
+
+    T_type    [reduce using rule 17 (type_expr)]
+    T_int     [reduce using rule 17 (type_expr)]
+    ".."      [reduce using rule 17 (type_expr)]
+    T_id      [reduce using rule 17 (type_expr)]
+    '('       [reduce using rule 17 (type_expr)]
+    $default  reduce using rule 17 (type_expr)
+
+    expr                  go to state 36
+    parenthesis_expr      go to state 21
+    non_parenthesis_expr  go to state 22
+    type_expr             go to state 23
+    non_type_expr         go to state 24
+    operation             go to state 25
+    term                  go to state 26
+
+
+State 31
+
+   25 term: T_id '[' • T_int ']'
+
+    T_int  shift, and go to state 37
+
+
+State 32
+
+   20 operation: expr • expr '+'
+   21          | expr • expr '*'
+
+    T_type  shift, and go to state 14
+    T_int   shift, and go to state 15
+    ".."    shift, and go to state 16
+    T_id    shift, and go to state 17
+    '('     shift, and go to state 18
+
+    expr                  go to state 36
+    parenthesis_expr      go to state 21
+    non_parenthesis_expr  go to state 22
+    type_expr             go to state 23
+    non_type_expr         go to state 24
+    operation             go to state 25
+    term                  go to state 26
+
+
+State 33
+
+   14 parenthesis_expr: '(' type_expr • ')'
+   16 non_parenthesis_expr: type_expr •
+
+    ')'  shift, and go to state 38
+
+    $default  reduce using rule 16 (non_parenthesis_expr)
+
+
+State 34
+
+   13 parenthesis_expr: '(' non_type_expr • ')'
+   15 non_parenthesis_expr: non_type_expr •
+
+    ')'  shift, and go to state 39
+
+    $default  reduce using rule 15 (non_parenthesis_expr)
+
+
+State 35
+
+    9 assignments: T_id '[' "forall" • T_id "in" T_int ".." T_int ']'
+
+    T_id  shift, and go to state 40
+
+
+State 36
+
+   20 operation: expr • expr '+'
+   20          | expr expr • '+'
+   21          | expr • expr '*'
+   21          | expr expr • '*'
+
+    T_type  shift, and go to state 14
+    T_int   shift, and go to state 15
+    ".."    shift, and go to state 16
+    T_id    shift, and go to state 17
+    '('     shift, and go to state 18
+    '+'     shift, and go to state 41
+    '*'     shift, and go to state 42
+
+    expr                  go to state 36
+    parenthesis_expr      go to state 21
+    non_parenthesis_expr  go to state 22
+    type_expr             go to state 23
+    non_type_expr         go to state 24
+    operation             go to state 25
+    term                  go to state 26
+
+
+State 37
+
+   25 term: T_id '[' T_int • ']'
+
+    ']'  shift, and go to state 43
+
+
+State 38
+
+   14 parenthesis_expr: '(' type_expr ')' •
+
+    $default  reduce using rule 14 (parenthesis_expr)
+
+
+State 39
+
+   13 parenthesis_expr: '(' non_type_expr ')' •
+
+    $default  reduce using rule 13 (parenthesis_expr)
+
+
+State 40
+
+    9 assignments: T_id '[' "forall" T_id • "in" T_int ".." T_int ']'
+
+    "in"  shift, and go to state 44
+
+
+State 41
+
+   20 operation: expr expr '+' •
+
+    $default  reduce using rule 20 (operation)
+
+
+State 42
+
+   21 operation: expr expr '*' •
+
+    $default  reduce using rule 21 (operation)
+
+
+State 43
+
+   25 term: T_id '[' T_int ']' •
+
+    $default  reduce using rule 25 (term)
+
+
+State 44
+
+    9 assignments: T_id '[' "forall" T_id "in" • T_int ".." T_int ']'
+
+    T_int  shift, and go to state 45
+
+
+State 45
+
+    9 assignments: T_id '[' "forall" T_id "in" T_int • ".." T_int ']'
+
+    ".."  shift, and go to state 46
+
+
+State 46
+
+    9 assignments: T_id '[' "forall" T_id "in" T_int ".." • T_int ']'
+
+    T_int  shift, and go to state 47
+
+
+State 47
+
+    9 assignments: T_id '[' "forall" T_id "in" T_int ".." T_int • ']'
+
+    ']'  shift, and go to state 48
+
+
+State 48
+
+    9 assignments: T_id '[' "forall" T_id "in" T_int ".." T_int ']' •
+
+    $default  reduce using rule 9 (assignments)

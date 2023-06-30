@@ -1,0 +1,5 @@
+roboticagent [
+   mem-clear; 
+   left-laser > 10 -> turn right 10;
+   left-laser > 13 -> turn right 20;
+]

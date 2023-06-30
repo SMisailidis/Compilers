@@ -1,0 +1,7 @@
++concert(A,V) : likes(A) <- !book_tickets(A,V).
+
++concert(A,V) : likes(A) <- !book_tickets(A,V) ; ?go(V,S) .
+
++!book_tickets(A,V) : not ( busy(phone) ) <- call(V) ; ask(Available) ; !choose_seats(A,V).
+
+

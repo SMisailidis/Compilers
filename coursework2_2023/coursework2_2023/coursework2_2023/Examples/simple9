@@ -1,0 +1,7 @@
+start simple9
+(arr [forall i in 8..20])
+(x  (100 arr[0] +))
+(print x)
+(y  (100 arr[1] *))
+(print y)
+end

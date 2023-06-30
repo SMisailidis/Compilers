@@ -1,0 +1,5 @@
+start simple6
+(x (1))
+(x (int (3.0 4.0 +)))
+(print x)
+end

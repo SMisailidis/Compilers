@@ -1,0 +1,5 @@
+start simple_error2
+(x 1.0)
+(x 1)
+(print x)
+end

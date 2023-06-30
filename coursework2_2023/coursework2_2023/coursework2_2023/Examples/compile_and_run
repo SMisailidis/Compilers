@@ -1,0 +1,9 @@
+#!/bin/sh
+../jvmLExp $1  $1.j
+echo
+echo "** Compiler Finished! **********************"
+echo "** Starting Jasmin Assembler ***************"
+jasmin $1.j
+echo "** Assembler Finished! *********************"
+echo "** Executing code in Java ******************"
+java $1

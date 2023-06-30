@@ -1,0 +1,5 @@
+start simple4
+(y 10)
+(x (3 y +))
+(print x)
+end

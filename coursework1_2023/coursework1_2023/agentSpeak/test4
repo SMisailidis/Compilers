@@ -1,0 +1,11 @@
+
+pos(r2,2,2).
+checking(slots).
+
++pos(r1,X1,Y1) : checking(slots) & not(garbage(r1)) & X1 < 12
+				<- next(slot).
++garbage(r1,X1,X2,Cap) : checking(slots) & X1 >= X2 | X1 = 10.90
+	<- !stop(check);
+	!take(garb,r2);
+	!continue(check).
+
